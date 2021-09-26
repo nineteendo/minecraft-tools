@@ -161,8 +161,8 @@ def parse_object_pairs(pairs):
 	pairs.append(("",""))
 	return pairs
 
-fail=open("fail.txt","w")
-fail.write("fails:")
+#fail=open("fail.txt","w")
+#fail.write("fails:")
 print("JSONSParser v1.0.0\nby Nineteendo")
 try:
 	inp = input("Input file or directory:")
@@ -174,14 +174,11 @@ except:
 
 print(inp,">",out)
 conversion(inp,out)
-fail.close()
-try:
-	pass
-	#os.startfile("fail.txt")
-except:
-	try:
-		pass
-		#os.system("open fail.txt")
-	except:
-		pass
-		#os.system("xdg-open fail.txt")
+#fail.close()
+#try:
+#	os.startfile("fail.txt")
+#except:
+#	try:
+#		os.system("open fail.txt")
+#	except:
+#		os.system("xdg-open fail.txt")
