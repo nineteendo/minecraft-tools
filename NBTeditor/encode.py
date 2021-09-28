@@ -2,7 +2,7 @@
 # written by Nineteendo
 # usage: put json files in jsons & run
 
-import os, json, struct
+import os, json, struct, gzip
 
 End = b"\x00"
 Int8 = b"\x01"
@@ -142,17 +142,29 @@ def conversion(inp,out):
 		for entry in sorted(os.listdir(inp)):
 			conversion(os.path.join(inp, entry),os.path.join(out, entry))
 	elif not inp.endswith('.' + 'rton'):
+		split = os.path.splitext(out)[0]
+		if split.endswith("hotbar"):
+			extension = ".nbt"
+		elif split.endswith("_mcr"):
+			extension = ".dat_mcr"
+			split = split.removesuffix('_mcr')  
+		elif split.endswith("_old"):
+			extension = ".dat_old"
+			split = split.removesuffix('_old')  
+		else:
+			extension = ".dat"
 		try:
 			data=("", json.loads(open(inp, 'rb').read(), object_pairs_hook=parse_object_pairs))
 		except:
 			print("\nno json: %s" % inp)
 		else:
 			try:
-				extension = ".nbt"
-				write=os.path.splitext(out)[0]+extension
-				
 				output = parse_json(data)
-				open(write, 'wb').write(output)
+				write=split+extension
+				if split.endswith(("servers","hotbar")):
+					open(write, 'wb').write(output)
+				else:
+					gzip.open(write, 'wb').write(output)
 				print("wrote " + write)
 			except Exception as e:
 				print('\n%s in %s: %s' % (type(e).__name__, inp, e))
