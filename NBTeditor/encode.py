@@ -86,7 +86,8 @@ def parse_json(data, override = End):
 			for k, v in enumerate(data):
 				tupel = parse_json(v)
 				newtag = tupel[0]
-				if tag != newtag:
+				emptylist = newtag == List and tupel[1][:1] == End
+				if tag != newtag and not emptylist:
 					if tag == End:
 						tag = newtag
 					elif tag in [Float, Double] and newtag in [Float,Double]:
@@ -98,20 +99,20 @@ def parse_json(data, override = End):
 						if newtag == Int64 or (tag != Int64  and (newtag == Int32) or (tag != Int32  and (newtag == Int16) or (tag != Int16  and (newtag == Int8)))):
 							tag = newtag
 					else:
-						raise TypeError("Found %s in a list of %s" % (mappings[newtag][0], mappings[tag][1]))
-				
+						raise TypeError("Found %s in a list of %s" % (mappings[newtag][0], mappings[tag][1]))      
 			for k, v in enumerate(data):
 				tupel = parse_json(v, tag)
+				if tag == End:
+					tag = tupel[0]
 				value = tupel[1]
 				string += value
-			
 			if override == List:
 				return (List, tag + string)
-			if tag == Int8:
+			elif tag == Int8 or override == Int8_List:
 				return (Int8_List, string)
-			elif tag == Int32:
+			elif tag == Int32 or override == Int32_List:
 				return (Int32_List, string)
-			elif tag == Int64:
+			elif tag == Int64 or override == Int64_List:
 				return (Int64_List, string)
 			else:
 				return (List, tag + string)
@@ -134,7 +135,7 @@ def parse_json(data, override = End):
 	elif isinstance(data, str):
 		return (String, encode_string(data))
 	else:
-		raise TypeError(type(data))
+		raise TypeError(type(data).__name__)
 
 def conversion(inp,out):
 	if os.path.isdir(inp):
@@ -175,10 +176,12 @@ def parse_object_pairs(pairs):
 
 #fail=open("fail.txt","w")
 #fail.write("fails:")
-print("JSONSParser v1.0.0\nby Nineteendo")
+print("\033[95m\033[1mJSONSParser v1.0.0\n(C) 2021 by Nineteendo\033[0m\n")
 try:
-	inp = input("Input file or directory:")
-	out = os.path.join(input("Output directory:"),os.path.basename(inp))
+	inp = input("\033[1mInput file or directory:\033[0m ")
+	out = input("\033[1mOutput directory:\033[0m ")
+	if os.path.isfile(inp):
+		out = os.path.join(out,os.path.basename(inp))
 except:
 	inp = "jsons/"
 	out = "nbts/"

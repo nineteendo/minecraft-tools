@@ -1,7 +1,14 @@
-import os
+import os, platform
 
 print("\n\033[95m\033[1mMinecraft Options Backupper v1.0.0\n(C) 2021 by Nineteendo\033[0m\n")
-path = os.path.expanduser('~/Library/Application Support/minecraft/')
+if (platform.system() == "Darwin"):
+	path = os.path.expanduser('~/Library/Application Support/minecraft/')
+elif (platform.system() == "Linux"):
+	path = os.path.expanduser('~/.minecraft/')
+elif (platform.system() == "Windows"):
+	path = os.path.expandvars('%APPDATA%\.minecraft/')
+else:
+	print("Unknown system: %s" % platform.system())
 all_options = {}
 try:
     options = open(path + "options.txt",'r')

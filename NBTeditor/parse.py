@@ -1,3 +1,6 @@
+# NBT parser (ALPHA!)
+# written by Nineteendo
+# usage: put nbt files in nbts & run
 import os, json, struct, gzip
 
 End = b"\x00"
@@ -117,10 +120,12 @@ mappings = {
 
 #fail=open("fail.txt","w")
 #fail.write("fails:")
-print("NBTParser v1.0.0\nby Nineteendo")
+print("\033[95m\033[1mNBTParser v1.0.0\n(C) 2021 by Nineteendo\033[0m\n")
 try:
-	inp = input("Input file or directory:")
-	out = os.path.join(input("Output directory:"),os.path.basename(inp))
+	inp = input("\033[1mInput file or directory:\033[0m ")
+	out = input("\033[1mOutput directory:\033[0m ")
+	if os.path.isfile(inp):
+		out = os.path.join(out,os.path.basename(inp))
 except:
 	inp = "nbts/"
 	out = "jsons/"
