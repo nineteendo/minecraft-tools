@@ -1,0 +1,20 @@
+{
+	"AllowNan": true,
+	"AutoBool": true,
+	"AutoInt": false,
+	"DefaultJSONPath": "jsons/",
+	"EnsureAscii": false,
+	"Indent": "\t",
+	"DefaultNBTPath": "nbts/",
+	"BigEndian": null,
+	"RepairFiles": false,
+	"CommaSeparator": "",
+	"DoublePointSeparator": " ",
+	"SortKeys": false,
+	"UncompressedFiles": [
+		".mcstructure",
+		".nbt",
+		"/servers.dat",
+		"/servers.dat_old"
+	]
+}

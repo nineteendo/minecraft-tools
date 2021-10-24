@@ -1,12 +1,29 @@
 # NBTeditor
 ## Usage
-* Put NBT files in folder, run parse.py and insert folder path (default /nbts) and output path (default /jsons)
+* Put NBT files in folder, run parse.py and insert path (default /nbts) and output path (default /jsons)
 * Edit files as JSON
-* run encode.py and insert folder path (default /jsons) and output path (default /nbts)
+* run encode.py and insert path (default /jsons) and output path (default /nbts)
+
+# Options.json
+key | default | purpose
+--- | --- | ---
+AllowNan | true | Allow NaN, -infinity and infinity as values
+AutoBool | true | Convert "true" and "false" to bool
+AutoInt" | false | Automatically choose between number and decimal number
+DefaultJSONPath | "jsons/" | Default path in case of EOFError
+EnsureAscii | false | escape non-ASCII characters
+Indent | "\t" | null, number of spaces or text as indent
+DefaultNBTPath | "nbts/" | Default path in case of EOFError
+BigEndian | null | Convert to Java Edition or Bedrock Edition
+RepairFiles | false | Repair NBT files that end abruptly
+CommaSeparator | "" | Separator between values
+DoublePointSeparator | " " | Separator between key and value
+SortKeys | false | Sort keys in dictionary
+UncompressedFiles | [".mcstructure", ".nbt", "/servers.dat", "/servers.dat_old"] | Files that are not compressed
 
 # NBT format
 Bytecode | Type | Name | Limitations
---- | --- | ---
+--- | --- | --- | ---
 `0x0` | end | TAG_End | Object End / Empty list type
 `0x1` | int8 | TAG_Byte | -128 to 127
 `0x2` | int16 | TAG_Short | -32768 to 32767
@@ -26,9 +43,7 @@ Bytecode | Type | Name | Limitations
 * `0x1 xxxx [string] yy` creates a `[string]` with `xxxx` uint16 of bytes with `yy` int8 as value
 * Example:
 	```NBT
-    0A 00 00
-    	01 00 06 68 65 61 6C 74 68 05
-    00
+    01 00 06 68 65 61 6C 74 68 05
     ```
 * JSON Decode:
 	```JSON
@@ -40,9 +55,7 @@ Bytecode | Type | Name | Limitations
 * `0x2 xxxx [string] yyyy` creates a `[string]` with `xxxx` uint16 of bytes with `yyyy` int16 as value
 * Example:
 	```NBT
-    0A 00 00
-    	02 00 06 62 6C 6F 63 6B 73 30 31
-    00
+    02 00 06 62 6C 6F 63 6B 73 30 31
     ```
 * JSON Decode:
 	```JSON
@@ -54,9 +67,7 @@ Bytecode | Type | Name | Limitations
 * `0x3 xxxx [string] yyyyyyyy` creates a `[string]` with `xxxx` uint16 of bytes with `yyyyyyyy` int32 as value
 * Example:
 	```NBT
-    0A 00 00
-    	03 00 07 76 65 72 73 69 6F 6E 00 02 82 B3
-    00
+    03 00 07 76 65 72 73 69 6F 6E 00 02 82 B3
     ```
 * JSON Decode:
 	```JSON
@@ -68,9 +79,7 @@ Bytecode | Type | Name | Limitations
 * `0x4 xxxx [string] yyyyyyyyyyyyyyyy` creates a `[string]` with `xxxx` uint16 of bytes with `yyyyyyyyyyyyyyyy` int64 as value
 * Example:
 	```NBT
-    0A 00 00
-    	04 00 04 74 69 6D 65 00 00 00 18 FF E1 0A 82
-    00
+    04 00 04 74 69 6D 65 00 00 00 18 FF E1 0A 82
     ```
 * JSON Decode:
 	```JSON
@@ -83,9 +92,7 @@ Bytecode | Type | Name | Limitations
 * `0x5 xxxx [string] yyyyyyyy` creates a `[string]` with `xxxx` uint16 of bytes with `yyyyyyyy` float32 as value
 * Example:
 	```NBT
-    0A 00 00
-    	05 00 01 78 3F 82 EF F5
-    00
+    05 00 01 78 3F 82 EF F5
     ```
 * JSON Decode:
 	```JSON
@@ -97,9 +104,7 @@ Bytecode | Type | Name | Limitations
 * `0x6 xxxx [string] yyyyyyyyyyyyyyyy` creates a `[string]` with `xxxx` uint16 of bytes with `yyyyyyyyyyyyyyyy` float64 as value
 * Example:
 	```NBT
-    0A 00 00
-    	06 00 01 78 40 21 90 44 72 91 3B 28
-    00
+    06 00 01 78 40 21 90 44 72 91 3B 28
     ```
 * JSON Decode:
 	```JSON
@@ -113,12 +118,10 @@ Bytecode | Type | Name | Limitations
 * List begins with int32 of elements
 * Example:
     ```
-    0A 00 00
-    	07 00 09 69 6E 76 65 6E 74 6F 72 79
-    	00 00 00 02
-    		01
-    		7F 
-    00
+    07 00 09 69 6E 76 65 6E 74 6F 72 79
+    00 00 00 02
+    	01
+    	7F
     ```
 * JSON Decode
     ```JSON
@@ -134,12 +137,10 @@ Bytecode | Type | Name | Limitations
 * List begins with int32 of elements
 * Example:
     ```
-    0A 00 00
-    	0B 00 09 69 6E 76 65 6E 74 6F 72 79
-    	00 00 00 02
-    		00 00 00 80
-    		00 01 F5 C5
-    00
+    0B 00 09 69 6E 76 65 6E 74 6F 72 79
+    00 00 00 02
+    	00 00 00 80
+    	00 01 F5 C5
     ```
 * JSON Decode
     ```JSON
@@ -155,19 +156,17 @@ Bytecode | Type | Name | Limitations
 * List begins with int32 of elements
 * Example:
     ```
-    0A 00 00
-    	0C 00 09 69 6E 76 65 6E 74 6F 72 79
-    	00 00 00 02
-    		00 00 00 00 00 00 02 1F
-    		00 00 00 01 40 9E ED 8B
-    00
+    0C 00 09 69 6E 76 65 6E 74 6F 72 79
+    00 00 00 02
+    	00 00 00 00 00 00 02 1F
+    	00 00 00 01 40 9E ED 8B
     ```
 * JSON Decode
     ```JSON
     {
 		"inventory": [
 			543,
-			5379124619 
+			5379124619
 		]
 	}
     ```
@@ -176,17 +175,16 @@ Bytecode | Type | Name | Limitations
 * `0x8 xxxx [string] yyyy [string 2]` creates a `[string]` with `xxxx` uint16 of bytes with a `[string 2]` with `yyyy` uint16 of bytes as value
 * Example:
     ```
-    0A 00 00
-    	08 00 04 6E 61 6D 65 00 09 42 61 6E 61 6E 72 61 6D 61
-    00
+    08 00 04 6E 61 6D 65 00 09 42 61 6E 61 6E 72 61 6D 61
     ```
 * JSON Decode
     ```JSON
     {
-    	"name": "Bananrama" 
+    	"name": "Bananrama"
     }
     ```
-### `0x9`
+### List
+#### `0x9`
 * `0x9 xxxx [string]` creates a `[string]` with `xxxx` uint16 of bytes with a list as value
 * It has 13 subsets (`0x0`, `0x1`, `0x2`, `0x3`, `0x4`, `0x5`, `0x6`, `0x7`, `0x8`, `0x9`, `0xa`, `0xb`, `0xc`)
 
@@ -194,10 +192,9 @@ Bytecode | Type | Name | Limitations
 * `0x9 xxxx [string] 0x0` creates a `[string]` with `xxxx` uint16 of bytes with an empty list as value
 * Example:
 	```NBT
-    0A 00 00
-    	09 00 09 69 6E 76 65 6E 74 6F 72 79 00
-    	00 00 00 00
-    00
+	09 00 09 69 6E 76 65 6E 74 6F 72 79
+	00
+    00 00 00 00
     ```
 * JSON Decode
     ```JSON
@@ -209,13 +206,11 @@ Bytecode | Type | Name | Limitations
 * `0x9 xxxx [string] 0x1` creates a `[string]` with `xxxx` uint16 of bytes with a list of int8 as value
 * Example:
 	```NBT
-    0A 00 00
-    	09 00 09 69 6E 76 65 6E 74 6F 72 79
+    09 00 09 69 6E 76 65 6E 74 6F 72 79
+    01
+    00 00 00 02
     	01
-    	00 00 00 02
-    		01
-    		7F 
-    00
+    	7F
     ```
 * JSON Decode
     ```JSON
@@ -230,13 +225,11 @@ Bytecode | Type | Name | Limitations
 * `0x9 xxxx [string] 0x2` creates a `[string]` with `xxxx` uint16 of bytes with a list of int16 as value
 * Example:
 	```NBT
-    0A 00 00
-    	09 00 09 69 6E 76 65 6E 74 6F 72 79
-    	02
-    	00 00 00 02
-    		00 01
-    		01 E3 
-    00
+    09 00 09 69 6E 76 65 6E 74 6F 72 79
+    02
+    00 00 00 02
+    	00 01
+    	01 E3
     ```
 * JSON Decode
     ```JSON
@@ -251,13 +244,11 @@ Bytecode | Type | Name | Limitations
 * `0x9 xxxx [string] 0x3` creates a `[string]` with `xxxx` uint16 of bytes with a list of int32 as value
 * Example:
 	```NBT
-    0A 00 00
-    	09 00 09 69 6E 76 65 6E 74 6F 72 79
-    	03
-    	00 00 00 02
-    		00 00 00 80
-    		00 01 F5 C5
-    00
+    09 00 09 69 6E 76 65 6E 74 6F 72 79
+    03
+    00 00 00 02
+    	00 00 00 80
+    	00 01 F5 C5
     ```
 * JSON Decode
     ```JSON
@@ -272,20 +263,18 @@ Bytecode | Type | Name | Limitations
 * `0x9 xxxx [string] 0x4` creates a `[string]` with `xxxx` uint16 of bytes with a list of int64 as value
 * Example:
 	```NBT
-    0A 00 00
-    	09 00 09 69 6E 76 65 6E 74 6F 72 79
-    	04
-    	00 00 00 02
-    		00 00 00 00 00 00 02 1F
-    		00 00 00 01 40 9E ED 8B
-    00
+    09 00 09 69 6E 76 65 6E 74 6F 72 79
+    04
+    00 00 00 02
+    	00 00 00 00 00 00 02 1F
+    	00 00 00 01 40 9E ED 8B
     ```
 * JSON Decode
     ```JSON
     {
 		"inventory": [
 			543,
-			5379124619 
+			5379124619
 		]
 	}
     ```
@@ -293,13 +282,11 @@ Bytecode | Type | Name | Limitations
 * `0x9 xxxx [string] 0x5` creates a `[string]` with `xxxx` uint16 of bytes with a list of float32 as value
 * Example:
 	```NBT
-    0A 00 00
-    	09 00 09 69 6E 76 65 6E 74 6F 72 79
-    	05
-    	00 00 00 02
-    		3F 80 00 00
-    		41 0C 82 24
-    00
+    09 00 09 69 6E 76 65 6E 74 6F 72 79
+    05
+    00 00 00 02
+    	3F 80 00 00
+    	41 0C 82 24
     ```
 * JSON Decode
     ```JSON
@@ -314,13 +301,11 @@ Bytecode | Type | Name | Limitations
 * `0x9 xxxx [string] 0x6` creates a `[string]` with `xxxx` uint16 of bytes with a list of float64 as value
 * Example:
 	```NBT
-    0A 00 00
-    	09 00 09 69 6E 76 65 6E 74 6F 72 79
-    	06
-    	00 00 00 02
-    		3F F1 99 99 99 99 99 9A
-    		3F F0 B0 20 C4 9B A5 E3
-    00
+    09 00 09 69 6E 76 65 6E 74 6F 72 79
+    06
+    00 00 00 02
+    	3F F1 99 99 99 99 99 9A
+    	3F F0 B0 20 C4 9B A5 E3
     ```
 * JSON Decode
     ```JSON
@@ -335,19 +320,16 @@ Bytecode | Type | Name | Limitations
 * `0x9 xxxx [string] 0x6` creates a `[string]` with `xxxx` uint16 of bytes with a list of lists of int8 as value
 * Example:
 	```NBT
-    0A 00 00
-    	09 00 09 69 6E 76 65 6E 74 6F 72 79
-    	07
-    	00 00 00 03
-    		00 00 00 00
-    		00 00 00 02
-    			01
-    			11
-    		00 00 00 02
-    			02
-    			3A
-    			
-    00
+	09 00 09 69 6E 76 65 6E 74 6F 72 79
+	07
+	00 00 00 03
+		00 00 00 00
+		00 00 00 02
+			01
+			11
+		00 00 00 02
+			02
+			3A
     ```
 * JSON Decode
     ```JSON
@@ -369,13 +351,11 @@ Bytecode | Type | Name | Limitations
 * `0x9 xxxx [string]` creates a `[string]` with `xxxx` uint16 of bytes with an list of string16 as value
 * Example:
     ```
-    0A 00 00
-    	09 00 09 69 6E 76 65 6E 74 6F 72 79
-    	08
-    	00 00 00 02
-    		00 05 62 72 65 61 64
-    		00 05 61 70 70 6C 65
-    00
+	09 00 09 69 6E 76 65 6E 74 6F 72 79
+	08
+	00 00 00 02
+		00 05 62 72 65 61 64
+		00 05 61 70 70 6C 65
     ```
 * JSON Decode
     ```JSON
@@ -385,24 +365,22 @@ Bytecode | Type | Name | Limitations
     		"apple"
     	]
     }
-    ```   
+    ```
 #### `0x9` Subset
 * `0x9 xxxx [string] 0x6` creates a `[string]` with `xxxx` uint16 of bytes with a list of lists as value
 * Example:
 	```NBT
-    0A 00 00
-    	09 00 09 69 6E 76 65 6E 74 6F 72 79
-    	09
-    	00 00 00 02
-    		01
-    			00 00 00 02
-    				01
-    				11
-    		02
-    			00 00 00 02
-    				00 02
-    				00 80
-    00
+	09 00 09 69 6E 76 65 6E 74 6F 72 79
+	09
+	00 00 00 02
+		01
+			00 00 00 02
+				01
+				11
+		02
+			00 00 00 02
+				00 02
+				00 80
     ```
 * JSON Decode
     ```JSON
@@ -423,22 +401,18 @@ Bytecode | Type | Name | Limitations
 * `0x9 xxxx [string] 0xA` creates a `[string]` with `xxxx` uint16 of bytes with a list of objects as value
 * Example:
 	```NBT
-    0A 00 00
-    	09 00 09 69 6E 76 65 6E 74 6F 72 79
-    	0A
-    	00 00 00 02
-    	00
-    		08 00 04 73 69 67 6e 00 04 74 65 78 74
-    	00
-    00
+	09 00 09 69 6E 76 65 6E 74 6F 72 79
+	0A
+	00 00 00 02
+	00
+		08 00 04 73 69 67 6e 00 04 74 65 78 74
+	00
     ```
 * JSON Decode
     ```JSON
     {
 		"inventory": [
-			{
-				
-			},
+			{},
 			{
 				"sign": "text"
 			}
@@ -450,17 +424,15 @@ Bytecode | Type | Name | Limitations
 * `0x9 xxxx [string] 0xB` creates a `[string]` with `xxxx` uint16 of bytes with a list of lists of int32 as value
 * Example:
 	```NBT
-    0A 00 00
-    	09 00 09 69 6E 76 65 6E 74 6F 72 79
-    	0B
-    	00 00 00 02
-    		00 00 00 02
-    			00 00 00 80
-    			00 01 F5 C5
-    		00 00 00 02
-    			00 00 00 2B
-    			00 01 31 57	
-    00
+	09 00 09 69 6E 76 65 6E 74 6F 72 79
+	0B
+	00 00 00 02
+		00 00 00 02
+			00 00 00 80
+			00 01 F5 C5
+		00 00 00 02
+			00 00 00 2B
+			00 01 31 57	
     ```
 * JSON Decode
     ```JSON
@@ -482,18 +454,15 @@ Bytecode | Type | Name | Limitations
 * `0x9 xxxx [string] 0xC` creates a `[string]` with `xxxx` uint16 of bytes with a list of lists of int64 as value
 * Example:
 	```NBT
-    0A 00 00
-    	09 00 09 69 6E 76 65 6E 74 6F 72 79
-    	0C
-    	00 00 00 02
-    		00 00 00 02
-    			00 00 00 00 00 00 02 1F
-    			00 00 00 01 40 9E ED 8B
-    		00 00 00 02
-    			00 00 00 00 00 00 05 FC
-    			00 00 00 02 32 68 FB 2F
-    			
-    00
+	09 00 09 69 6E 76 65 6E 74 6F 72 79
+	0C
+	00 00 00 02
+		00 00 00 02
+			00 00 00 00 00 00 02 1F
+			00 00 00 01 40 9E ED 8B
+		00 00 00 02
+			00 00 00 00 00 00 05 FC
+			00 00 00 02 32 68 FB 2F
     ```
 * JSON Decode
     ```JSON
@@ -505,7 +474,7 @@ Bytecode | Type | Name | Limitations
 			],
 			[
 				1532,
-				9435675439 
+				9435675439
 			]
 			
 		]
@@ -515,17 +484,17 @@ Bytecode | Type | Name | Limitations
 * `0x85 xxxx [string]` creates a `[string]` with `xxxx` uint16 of bytes with an object as value
 * Example:
     ```
-    0A 00 00
-    	0A 00 04 54 65 73 74
-    		08 00 07 4D 65 73 73 61 67 65 00 0B 48 65 6C 6C 6F 20 57 6F 72 6C 64
-    	00
-    00
+	0A 00 04 54 65 73 74
+		08 00 04 6E 61 6D 65 00 09 42 61 6E 61 6E 72 61 6D 61
+		08 00 07 4D 65 73 73 61 67 65 00 0B 48 65 6C 6C 6F 20 57 6F 72 6C 64
+	00
     ```
 * JSON Decode
     ```JSON
     {
     	"Test": {
-    		"Message": "Hello World" 
+    		"name": "Bananrama",
+    		"Message": "Hello World"
     	}
     }
     ```
@@ -538,7 +507,5 @@ Bytecode | Type | Name | Limitations
     ```
 * JSON Decode
     ```JSON
-    {
-    	
-    }
+    {}
     ```
