@@ -1,25 +1,24 @@
 # NBTeditor
 ## Usage
-* Put NBT files in folder, run parse.py and insert path (default /nbts) and output path (default /jsons)
+* Put NBT files in folder, run parse.py and insert input path and output path to your file or folder
 * Edit files as JSON
-* run encode.py and insert path (default /jsons) and output path (default /nbts)
+* run encode.py and insert input path and output path
 
 # Options.json
 key | default | purpose
 --- | --- | ---
 AllowNan | true | Allow NaN, -infinity and infinity as values
 AutoBool | true | Convert "true" and "false" to bool
-AutoInt" | false | Automatically choose between number and decimal number
-DefaultJSONPath | "jsons/" | Default path in case of EOFError
-EnsureAscii | false | escape non-ASCII characters
-Indent | "\t" | null, number of spaces or text as indent
-DefaultNBTPath | "nbts/" | Default path in case of EOFError
+AutoInt | false | Automatically choose between number and decimal number
 BigEndian | null | Convert to Java Edition or Bedrock Edition
-RepairFiles | false | Repair NBT files that end abruptly
 CommaSeparator | "" | Separator between values
 DoublePointSeparator | " " | Separator between key and value
+EnsureAscii | false | escape non-ASCII characters
+Indent | "\t" | null, number of spaces or text as indent
+NBTExtensions | [".dat", ".dat_mcr", ".dat_old", ".mcstructure", ".nbt"] | Extensions of NBT files
+RepairFiles | false | Repair NBT files that end abruptly
 SortKeys | false | Sort keys in dictionary
-UncompressedFiles | [".mcstructure", ".nbt", "/servers.dat", "/servers.dat_old"] | Files that are not compressed
+UncompressedFiles | ["_BE", ".mcstructure", ".nbt", "/servers.dat", "/servers.dat_old"] | Files that are not compressed
 
 # NBT format
 Bytecode | Type | Name | Limitations

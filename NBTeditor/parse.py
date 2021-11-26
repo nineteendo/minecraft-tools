@@ -1,7 +1,7 @@
-# NBT parser (ALPHA!)
+# NBT parser
 # written by Nineteendo
 # usage: put nbt files in nbts & run
-import os, json, struct, gzip
+import os, json, struct, gzip, zipfile
 
 # Data Types
 end = b"\x00"
@@ -18,27 +18,38 @@ object16 = b"\x0a"
 int32_list32 = b"\x0b"
 int64_list32 = b"\x0c"
 
-# Options
+# Default Options
 options = {
 	"AllowNan": True,
 	"AutoBool": True,
 	"AutoInt": False,
-	"DefaultJSONPath": "jsons/",
-	"EnsureAscii": False,
-	"Indent": "\t",
-	"DefaultNBTPath": "nbts/",
-	"BigEndian": False,
-	"RepairFiles": False,
+	"BigEndian": None,
 	"CommaSeparator": "",
 	"DoublePointSeparator": " ",
+	"EnsureAscii": False,
+	"Indent": "\t",
+	"NBTExtensions": (
+		".dat",
+		".dat_mcr",
+		".dat_old",
+		".mcstructure",
+		".nbt"
+	),
+	"RepairFiles": False,
 	"SortKeys": False,
 	"UncompressedFiles": (
+		"_BE",
 		".mcstructure",
 		".nbt",
 		"/servers.dat",
 		"/servers.dat_old"
 	)
 }
+
+edition = {
+	">": "Java Edition",
+	"<": "Bedrock Edition"
+} 
 
 # More versatile dictionaries
 class FakeDict(dict):
@@ -92,6 +103,7 @@ def parse_list32_code(fp, code, byteorder):
 	lenght = struct.unpack(byteorder + 'I', fp.read(4))[0]
 	if code == end:
 		return result
+		
 	if code in mappings:
 		for i in range(lenght):
 			result.append(mappings[code](fp, byteorder))
@@ -103,6 +115,7 @@ def parse_root_object16(fp, byteorder):
 		while True:
 			tupel = parse(fp, byteorder)
 			result.append(tupel)
+			
 	except KeyError as k:
 		if k.args[0] == b'':
 			return FakeDict(result)
@@ -118,11 +131,16 @@ def parse_object16(fp, byteorder):
 	except KeyError as k:
 		if str(k) == "b''":
 			if options["RepairFiles"]:
-				print("\33[33mWARNING: %s pos %s: end of file\33[0m" %(fp.name,fp.tell()-1))
+				print("\33[33mWARNING failed %s parse: %s pos %s: end of file\33[0m" %(edition[byteorder], fp.name,fp.tell()-1))
 			else:
 				raise EOFError
 		else:
 			raise TypeError("unknown tag %s" %k)
+	except struct.error: # struct.error: Unpack requires a buffer of XX bytes
+		if options["RepairFiles"]:
+			print("\33[33mWARNING failed %s parse: %s pos %s: end of file\33[0m" %(edition[byteorder], fp.name,fp.tell()-1))
+		else:
+			raise EOFError
 	except StopIteration:
 		pass
 	
@@ -132,6 +150,7 @@ def parse(fp, byteorder):
 	code = fp.read(1)
 	if code == end:
 		raise StopIteration
+		
 	function = mappings[code]
 	return (parse_string16(fp, byteorder), function(fp, byteorder))
 
@@ -152,39 +171,43 @@ mappings = {
 }
 
 def conversion(inp,out):
-	if os.path.isdir(inp):
+	if os.path.isdir(inp) and os.path.realpath(inp) != os.path.realpath(pathout):
 		os.makedirs(out, exist_ok=True)
 		for entry in sorted(os.listdir(inp)):
 			conversion(os.path.join(inp, entry),os.path.join(out, entry))
-	elif os.path.isfile(inp) and not inp.endswith('.' + 'json'):
-			# Header check
-			if open(inp,"rb").read(2) == b"\x1F\x8B":
-					file = gzip.open(inp,"rb")
-			else:
-				file = open(inp,"rb")
-			exception = ""
-			try:
-				jfn = out + '.json'
-				data = parse_root_object16(file, ">")
-				json.dump(data, open(jfn, 'w'), allow_nan = options["AllowNan"], ensure_ascii = options["EnsureAscii"], indent = options["Indent"], separators = ("," + options["CommaSeparator"], ":" + options["DoublePointSeparator"]), sort_keys = options["SortKeys"])
-				print('wrote %s' % jfn)
-			except Exception as e:
-				exception = '\33[91m%s in %s pos %s: %s\33[0m' % (type(e).__name__, inp, file.tell()-1, e)
-			if open(inp,"rb").read(2) == b"\x1F\x8B":
-					file = gzip.open(inp,"rb")
-			else:
-				file = open(inp,"rb")
-			try:
-				jfn = out + "_BE" + '.json'
-				data = parse_root_object16(file, "<")
-				json.dump(data, open(jfn, 'w'), allow_nan = options["AllowNan"], ensure_ascii = options["EnsureAscii"], indent = options["Indent"], separators = ("," + options["CommaSeparator"], ":" + options["DoublePointSeparator"]), sort_keys = options["SortKeys"])
-				print('wrote %s' % jfn)
-			except Exception as e:
-				if exception:
-					print(exception)
-					print('\33[91m%s in %s pos %s: %s\33[0m' % (type(e).__name__, inp, file.tell()-1, e))
+	elif os.path.isfile(inp) and inp.endswith(options["NBTExtensions"]):
+		# Header check
+		if open(inp,"rb").read(2) == b"\x1F\x8B":
+				file = gzip.open(inp,"rb")
+		else:
+			file = open(inp,"rb")
+			
+		exception = ""
+		try:
+			jfn = out + '.json'
+			data = parse_root_object16(file, ">")
+			json.dump(data, open(jfn, 'w'), allow_nan = options["AllowNan"], ensure_ascii = options["EnsureAscii"], indent = options["Indent"], separators = ("," + options["CommaSeparator"], ":" + options["DoublePointSeparator"]), sort_keys = options["SortKeys"])
+			print('wrote %s' % jfn)
+		except Exception as e:
+			exception = '\33[91mFailed %s parse: %s in %s pos %s: %s\33[0m' % (edition[">"], type(e).__name__, inp, file.tell()-1, e)
+			
+		if open(inp,"rb").read(2) == b"\x1F\x8B":
+				file = gzip.open(inp,"rb")
+		else:
+			file = open(inp,"rb")
+			
+		try:
+			jfn = out + "_BE" + '.json'
+			data = parse_root_object16(file, "<")
+			json.dump(data, open(jfn, 'w'), allow_nan = options["AllowNan"], ensure_ascii = options["EnsureAscii"], indent = options["Indent"], separators = ("," + options["CommaSeparator"], ":" + options["DoublePointSeparator"]), sort_keys = options["SortKeys"])
+			print('wrote %s' % jfn)
+		except Exception as e:
+			if exception:
+				print(exception)
+				print('\33[91mFailed %s parse: %s in %s pos %s: %s\33[0m' % (edition["<"], type(e).__name__, inp, file.tell()-1, e))
 
 print("\033[95m\033[1mNBTParser v1.0.0\n(C) 2021 by Nineteendo\033[0m\n")
+print("Working directory: %s" % os. getcwd())	
 try:
 	newoptions = json.load(open("options.json", "rb"))
 	for key in options:
@@ -199,21 +222,15 @@ try:
 				options[key] = newoptions[key]
 except:
 	print("\33[91mFailed to load options.json\33[0m")
-	
-try:
-	inp = input("\033[1mInput file or directory:\033[0m ")
-	if os.path.isfile(inp):
-		out = input("\033[1mOutput file:\033[0m ").removesuffix(".json")
-	else:
-		out = input("\033[1mOutput directory:\033[0m ")
-except:
-	inp = options["DefaultNBTPath"]
-	out = options["DefaultJSONPath"]
-	os.makedirs(inp, exist_ok=True)
 
-print(inp,">",out)
+try:
+	pathin = input("\033[1mInput file or directory\033[0m: ")
+	if os.path.isfile(pathin):
+		pathout = input("\033[1mOutput file\033[0m: ").removesuffix(".json")
+	else:
+		pathout = input("\033[1mOutput directory\033[0m: ")
 	
-# Prepare Global variables
-byteorder = ">"
-# Start conversion
-conversion(inp,out)
+	# Start conversion
+	conversion(pathin,pathout)
+except BaseException as e:
+	print('\n\33[91m%s: %s\33[0m' % (type(e).__name__, e))

@@ -34,21 +34,27 @@ mappings = {
 	b"\x0c": ["list of numbers","list of numbers"]
 }
 
-# Options
+# Default Options
 options = {
 	"AllowNan": True,
 	"AutoBool": True,
 	"AutoInt": False,
-	"DefaultJSONPath": "jsons/",
+	"BigEndian": None,
+	"CommaSeparator": "",
+	"DoublePointSeparator": " ",
 	"EnsureAscii": False,
 	"Indent": "\t",
-	"DefaultNBTPath": "nbts/",
-	"BigEndian": None,
+	"NBTExtensions": (
+		".dat",
+		".dat_mcr",
+		".dat_old",
+		".mcstructure",
+		".nbt"
+	),
 	"RepairFiles": False,
-	"CommaSeparator": " ",
-	"DoublePointSeparator": " ",
 	"SortKeys": False,
 	"UncompressedFiles": (
+		"_BE",
 		".mcstructure",
 		".nbt",
 		"/servers.dat",
@@ -133,6 +139,7 @@ def encode_object16(data, byteorder, override = end):
 	for v in data[:-1]:
 		value = encode_json(v, byteorder)
 		string += value
+		
 	return string
 	
 def encode_json(data, byteorder, override = end):
@@ -162,7 +169,7 @@ def encode_json(data, byteorder, override = end):
 		raise TypeError(type(data).__name__)
 
 def conversion(inp,out):
-	if os.path.isdir(inp):
+	if os.path.isdir(inp) and os.path.realpath(inp) != os.path.realpath(pathout):
 		os.makedirs(out, exist_ok=True)
 		for entry in sorted(os.listdir(inp)):
 			conversion(os.path.join(inp, entry),os.path.join(out, entry))
@@ -179,11 +186,12 @@ def conversion(inp,out):
 				else:
 					byteorder = "<"
 					
-				write = write.removesuffix("_BE")
 				output = encode_object16(data, byteorder)
 				if write.endswith(options["UncompressedFiles"]):
+					write = write.removesuffix("_BE")
 					open(write, 'wb').write(output)
 				else:
+					write = write.removesuffix("_BE")
 					gzip.open(write, 'wb').write(output)
 					
 				print("wrote " + write)
@@ -198,6 +206,7 @@ def encode_object_pairs(pairs):
 	return pairs
 
 print("\033[95m\033[1mJSONS NBTencoder v1.0.0\n(C) 2021 by Nineteendo\033[0m\n")
+print("Working directory: %s" % os. getcwd())	
 try:
 	newoptions = json.load(open("options.json", "rb"))
 	for key in options:
@@ -212,19 +221,15 @@ try:
 				options[key] = newoptions[key]
 except:
 	print("\33[91mFailed to load options.json\33[0m")
-	
+
 try:
-	inp = input("\033[1mInput file or directory:\033[0m ")
-	if os.path.isfile(inp):
-		out = input("\033[1mOutput file:\033[0m ") + ".json"
+	pathin = input("\033[1mInput file or directory\033[0m: ")
+	if os.path.isfile(pathin):
+		pathout = input("\033[1mOutput file\033[0m: ").removesuffix(".json")
 	else:
-		out = input("\033[1mOutput directory:\033[0m ")
-except Exception:
-	inp = options["DefaultJSONPath"]
-	out = options["DefaultNBTPath"]
-	os.makedirs(inp, exist_ok=True)
-
-print(inp,">",out)
-
-# Start conversion
-conversion(inp,out)
+		pathout = input("\033[1mOutput directory\033[0m: ")
+	
+	# Start conversion
+	conversion(pathin,pathout)
+except BaseException as e:
+	print('\n\33[91m%s: %s\33[0m' % (type(e).__name__, e))
