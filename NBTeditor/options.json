@@ -1,9 +1,11 @@
 {
 	"AllowNan": true,
 	"AutoBool": true,
+	"AutoFloat": false,
 	"AutoInt": false,
 	"BigEndian": null,
 	"CommaSeparator": "",
+	"DEBUG_MODE": false,
 	"DoublePointSeparator": " ",
 	"EnsureAscii": false,
 	"Indent": "\t",
@@ -14,7 +16,7 @@
 		".mcstructure",
 		".nbt"
 	],
-	"RepairFiles": false,
+	"RepairFiles": true,
 	"SortKeys": false,
 	"UncompressedFiles": [
 		"_BE",
