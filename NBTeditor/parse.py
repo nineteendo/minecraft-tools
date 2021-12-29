@@ -1,8 +1,8 @@
 # NBT parser
 # written by Nineteendo
 
-# Used libraries
-import os, json, struct, gzip, sys
+# Import libraries
+import os, json, struct, gzip, sys, traceback
 
 # Data Types
 end = b"\x00"
@@ -65,6 +65,14 @@ class FakeDict(dict):
 	def items(self):
 		return self._items
 
+def error_message(string):
+	if options["DEBUG_MODE"]:
+		string = traceback.format_exc()
+	
+	fail.write(string + "\n")
+	print("\33[91m%s\33[0m" % string)
+
+## Parse numbers
 def parse_int8(fp, byteorder):
 	return struct.unpack('b', fp.read(1))[0]
 	
@@ -83,15 +91,14 @@ def parse_float32(fp, byteorder):
 def parse_float64(fp, byteorder):
 	return struct.unpack(byteorder + 'd', fp.read(8))[0]
 	
+## Parse strings
 def parse_string16(fp, byteorder):
-	length = struct.unpack(byteorder + 'H', fp.read(2))[0]
-	undecoded_string = fp.read(length)
-	if length > len(undecoded_string): # Wrong byte order
-		raise EOFError
-	elif length < len(undecoded_string): # Cut off file
-		raise KeyError(b"")
+	string = fp.read(struct.unpack(byteorder + 'H', fp.read(2))[0]).decode()
+	for key in "\x00\x01\x02\x03\x04\x05\x06\x07\x08\x0b\x0c\x0e\x0f\x10\x11\x12\x13\x14\x15\x16\x17\x18\x19\x1a\x1b\x1c\x1d\x1e\x1f": # Illegal characters
+		if key in string: # Wrong Byte Order
+			raise ValueError("%s in %s" % (key, string))
 	
-	return undecoded_string.decode('utf-8')
+	return string
 
 def parse_value_string16(fp, byteorder):
 	string = parse_string16(fp, byteorder)
@@ -100,6 +107,7 @@ def parse_value_string16(fp, byteorder):
 	
 	return string
 
+## Parse lists
 def parse_list32(fp, byteorder):
 	return parse_list32_code(fp, fp.read(1), byteorder)
 	
@@ -130,18 +138,18 @@ def parse_list32_code(fp, code, byteorder):
 		
 	return result
 
+## Parse objects
 def parse_root_object16(fp, byteorder):
 	result = []
 	try:
 		while True:
 			tupel = parse(fp, byteorder)
 			result.append(tupel)
-			
 	except KeyError as k:
-		if k.args[0] != b'':
-			raise k
+		if k.args[0] != b'' and len(result) == 0: # End of file
+			raise TypeError("unknown tag %s" % k)
 	except struct.error: # struct.error: Unpack requires a buffer of XX bytes
-		if options["RepairFiles"]:
+		if options["RepairFiles"] and len(result) > 0:
 			print("\33[33mWARNING in %s parse: %s pos %s: end of file\33[0m" %(edition[byteorder], fp.name, fp.tell() - 1))
 		else:
 			raise EOFError
@@ -172,6 +180,7 @@ def parse_object16(fp, byteorder):
 	
 	return FakeDict(result)
 
+## Parse data type
 def parse(fp, byteorder):
 	code = fp.read(1)
 	if code == end:
@@ -196,6 +205,7 @@ mappings = {
 	b"\x0c": parse_int64_list32
 }
 
+## Recursive file convert function
 def conversion(inp, out):
 	if os.path.isdir(inp) and os.path.realpath(inp) != os.path.realpath(pathout):
 		os.makedirs(out, exist_ok=True)
@@ -204,7 +214,7 @@ def conversion(inp, out):
 	elif os.path.isfile(inp) and inp.endswith(options["NBTExtensions"]):
 		# Header check
 		if open(inp, "rb").read(2) == b"\x1F\x8B":
-				file = gzip.open(inp, "rb")
+			file = gzip.open(inp, "rb")
 		else:
 			file = open(inp, "rb")
 		
@@ -215,13 +225,10 @@ def conversion(inp, out):
 			json.dump(data, open(jfn, 'w'), allow_nan = options["AllowNan"], ensure_ascii = options["EnsureAscii"], indent = options["Indent"], separators = ("," + options["CommaSeparator"], ":" + options["DoublePointSeparator"]), sort_keys = options["SortKeys"])
 			print('wrote %s' % os.path.relpath(jfn, pathout))
 		except Exception as e:
-			if options["DEBUG_MODE"]:
-				raise e
-			else:
-				exception = '\33[91mFailed %s parse: %s in %s pos %s: %s\33[0m' % (edition[">"], type(e).__name__, inp, file.tell() - 1, e)
+			exception = 'Failed Java Edition parse: %s in %s pos %s: %s' % (type(e).__name__, inp, file.tell() - 1, e)
 		
 		if open(inp, "rb").read(2) == b"\x1F\x8B":
-				file = gzip.open(inp, "rb")
+			file = gzip.open(inp, "rb")
 		else:
 			file = open(inp, "rb")
 		
@@ -231,18 +238,16 @@ def conversion(inp, out):
 			json.dump(data, open(jfn, 'w'), allow_nan = options["AllowNan"], ensure_ascii = options["EnsureAscii"], indent = options["Indent"], separators = ("," + options["CommaSeparator"], ":" + options["DoublePointSeparator"]), sort_keys = options["SortKeys"])
 			print('wrote %s' % os.path.relpath(jfn, pathout))
 		except Exception as e:
-			if options["DEBUG_MODE"]:
-				raise e
-			elif exception:
-				print(exception)
-				print('\33[91mFailed %s parse: %s in %s pos %s: %s\33[0m' % (edition["<"], type(e).__name__, inp, file.tell() - 1, e))
+			if exception != "":
+				error_message("%s\nFailed Bedrock Edition parse: %s in %s pos %s: %s" % (exception, type(e).__name__, inp, file.tell() - 1, e))
 
 try:
+	fail = open("fail.txt", "w")
 	if sys.version_info[0] < 3:
 		raise RuntimeError("Must be using Python 3")
     
 	print("\033[95m\033[1mJSONS NBTencoder v1.1.0\n(C) 2021 by Nineteendo\033[0m\n")
-	print("Working directory: %s" % os. getcwd())
+	print("Working directory: " + os.getcwd())
 	try:
 		newoptions = json.load(open("options.json", "rb"))
 		for key in options:
@@ -256,10 +261,7 @@ try:
 				elif key == "Indent" and type(newoptions[key]) in [int, type(None)]:
 					options[key] = newoptions[key]
 	except Exception as e:
-		if options["DEBUG_MODE"]:
-			raise e
-		else:
-			print('\n\33[91m%s in options.json: %s\33[0m' % (type(e).__name__, e))
+		error_message('%s in options.json: %s' % (type(e).__name__, e))
 	
 	pathin = input("\033[1mInput file or directory\033[0m: ")
 	if os.path.isfile(pathin):
@@ -270,7 +272,5 @@ try:
 	# Start conversion
 	conversion(pathin, pathout)
 except BaseException as e:
-	if options["DEBUG_MODE"]:
-		raise e
-	else:
-		print('\n\33[91m%s: %s\33[0m' % (type(e).__name__, e))
+	error_message('%s: %s' % (type(e).__name__, e))
+fail.close()

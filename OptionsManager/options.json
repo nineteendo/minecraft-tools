@@ -1,0 +1,11 @@
+{
+	"backupOptions": true,
+	"DEBUG_MODE": false,
+	"minecraftFolder": {
+		"Darwin": "~/Library/Application Support/minecraft",
+		"Linux": "~/.minecraft",
+		"Windows": "%APPDATA%/.minecraft"
+	},
+	"renameOptions": true,
+	"showChanges": false
+}

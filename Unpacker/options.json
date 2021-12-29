@@ -1,0 +1,11 @@
+{
+	"DEBUG_MODE": false,
+	"ignoreExtensions": [
+		".class"
+	],
+	"minecraftFolder": {
+		"Darwin": "~/Library/Application Support/minecraft/",
+		"Linux": "~/.minecraft/",
+		"Windows": "%APPDATA%/.minecraft/"
+	}
+}

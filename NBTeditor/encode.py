@@ -2,7 +2,7 @@
 # written by Nineteendo
 
 # Used libraries
-import os, json, struct, gzip, sys
+import os, json, struct, gzip, sys, traceback
 
 # Data Types
 end = b"\x00"
@@ -65,18 +65,30 @@ mappings = {
 	b"\x0c": ["list of numbers", "list of numbers"]
 }
 
+# inf and -inf values
+Infinity = [float("Infinity"), float("-Infinity")]
+
 # Extra list class
 class list2:
     def __init__(self, data):
     	self.data = data
 
+def error_message(string):
+	if options["DEBUG_MODE"]:
+		string = traceback.format_exc()
+	
+	fail.write(string + "\n")
+	print("\33[91m%s\33[0m" % string)
+
 # Encode text
 def encode_string(string, byteorder):
-	encoded = string.encode('utf-8')
+	# Illegal characters
+	for key in "\x00\x01\x02\x03\x04\x05\x06\x07\x08\x0b\x0c\x0e\x0f\x10\x11\x12\x13\x14\x15\x16\x17\x18\x19\x1a\x1b\x1c\x1d\x1e\x1f":
+		if key in string: # Wrong Byte Order
+			raise ValueError("%s in %s" % (key, string))
+	
+	encoded = string.encode()
 	return struct.pack(byteorder + "H", len(encoded)) + encoded
-
-# NaN, inf and -inf values
-Infinity = [float("Infinity"), float("-Infinity")]
 
 # Encode (decimal) number
 def encode_number(integ, byteorder, isint = True, override = end):
@@ -104,16 +116,16 @@ def encode_list(data, byteorder, override = end):
 		tupel = encode_json(v, byteorder)
 		newtag = tupel[0]
 		if isinstance(v, int) or isinstance(v, float):
-			if -340282346638528859811704183484516925440 <= v <= 340282346638528859811704183484516925440 and v != struct.unpack('>f', struct.pack(">f", v))[0]:
+			if -340282346638528859811704183484516925440 <= v <= 340282346638528859811704183484516925440 and v != struct.unpack('f', struct.pack("f", v))[0]:
 				special = int32
 		
-		if isinstance(v, bool) and special != list32 and tag in [end, int8, int16, float32, int32, float64, int64]: # Boolian
+		if isinstance(v, bool) and special != list32 and tag in [end, int8, int16, float32, int32, float64, int64, string16]: # Boolian
 			if special == end:
 				special = string16
 		elif v == [] and special in [end, list32] and tag in [end, list32, int8_list32, int32_list32, int64_list32]: # Empty list
 			special = list32
 		elif tag != newtag:
-			if tag == end and (special in [end, int32] or (special == list32 and newtag in [list32, int8_list32, int32_list32, int64_list32]) or (special == string16 and newtag in [int8, int16, float32, int32, float64, int64, string16])):
+			if tag == end and (special == end or (special == list32 and newtag in [list32, int8_list32, int32_list32, int64_list32]) or (special != list32 and newtag in [int8, int16, float32, int32, float64, int64, string16])):
 				tag = newtag
 			elif tag in [list32, int8_list32, int32_list32, int64_list32] and newtag in [list32, int8_list32, int32_list32, int64_list32]:
 				tag = list32
@@ -188,23 +200,19 @@ def conversion(inp, out):
 		os.makedirs(out, exist_ok=True)
 		for entry in sorted(os.listdir(inp)):
 			conversion(os.path.join(inp, entry), os.path.join(out, entry))
-	elif os.path.isfile(inp) and inp.removesuffix(".json").endswith(options["NBTExtensions"]):
+	elif os.path.isfile(inp) and inp.endswith(".json") and inp.endswith(options["NBTExtensions"], 0, -5):
 		write = out.removesuffix(".json")
 		try:
 			data = json.load(open(inp, 'rb'), object_pairs_hook = encode_object_pairs)
 		except Exception as e:
-			if options["DEBUG_MODE"]:
-				raise e
-			else:
-				print('\33[91m%s in %s: %s\33[0m' % (type(e).__name__, inp, e))
+			error_message('%s in %s: %s' % (type(e).__name__, inp, e))
 		else:
 			try:
 				if options["BigEndian"] or options["BigEndian"] == None and not write.endswith("_BE"):
-					byteorder = ">"
+					output = encode_object16(data, ">")
 				else:
-					byteorder = "<"
+					output = encode_object16(data, "<")
 		
-				output = encode_object16(data, byteorder)
 				if write.endswith(options["UncompressedFiles"]):
 					write = write.removesuffix("_BE")
 					open(write, 'wb').write(output)
@@ -214,10 +222,7 @@ def conversion(inp, out):
 		
 				print("wrote " + os.path.relpath(write, pathout))
 			except Exception as e:
-				if options["DEBUG_MODE"]:
-					raise e
-				else:
-					print('\33[91m%s in %s: %s\33[0m' % (type(e).__name__, inp, e))
+				error_message('%s in %s: %s' % (type(e).__name__, inp, e))
 
 def encode_object_pairs(pairs):
 	if options["SortKeys"]:
@@ -226,11 +231,12 @@ def encode_object_pairs(pairs):
 	return list2(pairs)
 	
 try:
+	fail = open("fail.txt", "w")
 	if sys.version_info[0] < 3:
 		raise RuntimeError("Must be using Python 3")
     
 	print("\033[95m\033[1mJSONS NBTencoder v1.1.0\n(C) 2021 by Nineteendo\033[0m\n")
-	print("Working directory: %s" % os. getcwd())
+	print("Working directory: " + os.getcwd())
 	try:
 		newoptions = json.load(open("options.json", "rb"))
 		for key in options:
@@ -244,10 +250,7 @@ try:
 				elif key == "Indent" and type(newoptions[key]) in [int, type(None)]:
 					options[key] = newoptions[key]
 	except Exception as e:
-		if options["DEBUG_MODE"]:
-			raise e
-		else:
-			print('\n\33[91m%s in options.json: %s\33[0m' % (type(e).__name__, e))
+		error_message('%s in options.json: %s' % (type(e).__name__, e))
 	
 	pathin = input("\033[1mInput file or directory\033[0m: ")
 	if os.path.isfile(pathin):
@@ -258,7 +261,5 @@ try:
 	# Start conversion
 	conversion(pathin, pathout)
 except BaseException as e:
-	if options["DEBUG_MODE"]:
-		raise e
-	else:
-		print('\n\33[91m%s: %s\33[0m' % (type(e).__name__, e))
+	error_message('%s: %s' % (type(e).__name__, e))
+fail.close()

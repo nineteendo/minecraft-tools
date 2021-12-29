@@ -1,0 +1,754 @@
+{
+  "profiles" : {
+    "01588a78b10a8b2d95b5398d9c5bf0c2" : {
+      "created" : "2021-12-06T15:45:20.772Z",
+      "icon" : "Furnace",
+      "lastUsed" : "1970-01-01T00:00:00.000Z",
+      "lastVersionId" : "c0.0.23a_01",
+      "name" : "",
+      "type" : "custom"
+    },
+    "02a3945fb71ed633a3997a8380cfe98d" : {
+      "created" : "2021-12-06T16:22:08.708Z",
+      "icon" : "Furnace",
+      "lastUsed" : "1970-01-01T00:00:00.000Z",
+      "lastVersionId" : "c0.0.19a_06-2",
+      "name" : "",
+      "type" : "custom"
+    },
+    "05237f7c27cb229e0f3f13e3617d27f2" : {
+      "created" : "2021-12-06T15:17:00.398Z",
+      "icon" : "Furnace",
+      "lastUsed" : "1970-01-01T00:00:00.000Z",
+      "lastVersionId" : "1.15.2",
+      "name" : "",
+      "type" : "custom"
+    },
+    "087994891bbc928f5d90ed759da818f4" : {
+      "created" : "2021-12-07T18:24:18.309Z",
+      "icon" : "Furnace",
+      "lastUsed" : "1970-01-01T00:00:00.000Z",
+      "lastVersionId" : "inf-20100618",
+      "name" : "",
+      "type" : "custom"
+    },
+    "09643a98bf1897bb54215aacbb6ec2c8" : {
+      "created" : "2021-12-07T18:45:24.662Z",
+      "icon" : "Furnace",
+      "lastUsed" : "1970-01-01T00:00:00.000Z",
+      "lastVersionId" : "1.14_combat-212796",
+      "name" : "",
+      "type" : "custom"
+    },
+    "09b5261f018078b0193b1a8f3b2cce66" : {
+      "created" : "2021-12-07T18:48:54.338Z",
+      "icon" : "Furnace",
+      "lastUsed" : "1970-01-01T00:00:00.000Z",
+      "lastVersionId" : "1.18_experimental-snapshot-7",
+      "name" : "",
+      "type" : "custom"
+    },
+    "0d5109d90cb07ecfa06436882da3e0fe" : {
+      "created" : "2021-12-06T15:17:11.988Z",
+      "icon" : "Furnace",
+      "lastUsed" : "1970-01-01T00:00:00.000Z",
+      "lastVersionId" : "1.13.2",
+      "name" : "",
+      "type" : "custom"
+    },
+    "0e23f57e46e663de268a749a0091b241" : {
+      "created" : "1970-01-01T00:00:00.000Z",
+      "icon" : "Crafting_Table",
+      "lastUsed" : "1970-01-01T00:00:00.000Z",
+      "lastVersionId" : "latest-snapshot",
+      "name" : "",
+      "type" : "latest-snapshot"
+    },
+    "0f624e5e04b771ed584896e65e4c7b7f" : {
+      "created" : "2021-12-06T15:16:49.494Z",
+      "icon" : "Furnace",
+      "lastUsed" : "1970-01-01T00:00:00.000Z",
+      "lastVersionId" : "1.17.1",
+      "name" : "",
+      "type" : "custom"
+    },
+    "0fbf9b641122ec6410760f52dce38a15" : {
+      "created" : "2021-12-06T15:55:06.861Z",
+      "icon" : "Furnace",
+      "lastUsed" : "1970-01-01T00:00:00.000Z",
+      "lastVersionId" : "c0.0.20a_02",
+      "name" : "",
+      "type" : "custom"
+    },
+    "1329686075836813925a75e7d75dbdb5" : {
+      "created" : "2021-12-07T18:48:39.135Z",
+      "icon" : "Furnace",
+      "lastUsed" : "1970-01-01T00:00:00.000Z",
+      "lastVersionId" : "1.18_experimental-snapshot-3",
+      "name" : "",
+      "type" : "custom"
+    },
+    "133d7b13cb31d518dcfe22f7e614f619" : {
+      "created" : "2021-12-07T18:30:25.457Z",
+      "icon" : "Furnace",
+      "lastUsed" : "1970-01-01T00:00:00.000Z",
+      "lastVersionId" : "a1.0.11",
+      "name" : "",
+      "type" : "custom"
+    },
+    "144097fed0998ffec6aed3033cd8bd3e" : {
+      "created" : "2021-12-06T15:18:11.758Z",
+      "icon" : "Furnace",
+      "lastUsed" : "1970-01-01T00:00:00.000Z",
+      "lastVersionId" : "1.12.2",
+      "name" : "",
+      "type" : "custom"
+    },
+    "22bcd3885ec628de6deb0a82b36760f4" : {
+      "created" : "2021-12-06T15:41:55.394Z",
+      "icon" : "Furnace",
+      "lastUsed" : "1970-01-01T00:00:00.000Z",
+      "lastVersionId" : "a1.0.1_01",
+      "name" : "",
+      "type" : "custom"
+    },
+    "239f711f599f60e620ac260edd44a2a0" : {
+      "created" : "2021-12-06T15:16:54.373Z",
+      "icon" : "Furnace",
+      "lastUsed" : "1970-01-01T00:00:00.000Z",
+      "lastVersionId" : "1.16.5",
+      "name" : "",
+      "type" : "custom"
+    },
+    "2636ff90de09834bdaa69c79cf06c32e" : {
+      "created" : "2021-12-07T18:46:27.358Z",
+      "icon" : "Furnace",
+      "lastUsed" : "1970-01-01T00:00:00.000Z",
+      "lastVersionId" : "1.15_combat-6",
+      "name" : "",
+      "type" : "custom"
+    },
+    "27bee725974e04b281a60200bfa198dc" : {
+      "created" : "2021-12-07T08:21:30.754Z",
+      "icon" : "Furnace",
+      "lastUsed" : "1970-01-01T00:00:00.000Z",
+      "lastVersionId" : "rd-161348",
+      "name" : "",
+      "type" : "custom"
+    },
+    "2b812b685be3c420329a28f4139a6d24" : {
+      "created" : "2021-12-06T15:44:44.829Z",
+      "icon" : "Furnace",
+      "lastUsed" : "1970-01-01T00:00:00.000Z",
+      "lastVersionId" : "c0.27_st",
+      "name" : "",
+      "type" : "custom"
+    },
+    "2df069b6d3895628f96c6c1cc8d46369" : {
+      "created" : "2021-12-07T18:33:58.463Z",
+      "icon" : "Furnace",
+      "lastUsed" : "1970-01-01T00:00:00.000Z",
+      "lastVersionId" : "a1.1.1",
+      "name" : "",
+      "type" : "custom"
+    },
+    "2e8aa08ea2cbb20e89f5de5223c1a4f3" : {
+      "created" : "2021-12-06T15:23:34.262Z",
+      "icon" : "Furnace",
+      "lastUsed" : "1970-01-01T00:00:00.000Z",
+      "lastVersionId" : "b1.0.2",
+      "name" : "",
+      "type" : "custom"
+    },
+    "31fd9383ad509a24d92921f02b1e3f21" : {
+      "created" : "2021-12-06T15:21:39.223Z",
+      "icon" : "Furnace",
+      "lastUsed" : "1970-01-01T00:00:00.000Z",
+      "lastVersionId" : "b1.5_01",
+      "name" : "",
+      "type" : "custom"
+    },
+    "32e7ba21fdeef5ce2b1b0a05109fd98c" : {
+      "created" : "2021-12-07T08:20:41.369Z",
+      "icon" : "Furnace",
+      "lastUsed" : "1970-01-01T00:00:00.000Z",
+      "lastVersionId" : "c0.0.15a-1",
+      "name" : "",
+      "type" : "custom"
+    },
+    "34874e13487b352cf9cb467399d5980d" : {
+      "created" : "2021-12-06T15:22:23.263Z",
+      "icon" : "Furnace",
+      "lastUsed" : "1970-01-01T00:00:00.000Z",
+      "lastVersionId" : "b1.2_02",
+      "name" : "",
+      "type" : "custom"
+    },
+    "3936a8dd4045fdfdd12f27c8da9d9f9b" : {
+      "created" : "2021-12-06T15:45:00.236Z",
+      "icon" : "Furnace",
+      "lastUsed" : "1970-01-01T00:00:00.000Z",
+      "lastVersionId" : "c0.25_05_st",
+      "name" : "",
+      "type" : "custom"
+    },
+    "3c5cf83346d1c425ae51f77c1f7e82bb" : {
+      "created" : "2021-12-07T08:20:57.237Z",
+      "icon" : "Furnace",
+      "lastUsed" : "1970-01-01T00:00:00.000Z",
+      "lastVersionId" : "c0.0.14a_08",
+      "name" : "",
+      "type" : "custom"
+    },
+    "3f303f91869981ce7bdcbe4e88cc1b5d" : {
+      "created" : "2021-12-07T18:30:11.704Z",
+      "icon" : "Furnace",
+      "lastUsed" : "1970-01-01T00:00:00.000Z",
+      "lastVersionId" : "a1.0.6",
+      "name" : "",
+      "type" : "custom"
+    },
+    "3feaad98f4bab3b66209cce5544742f2" : {
+      "created" : "2021-12-07T18:31:47.472Z",
+      "icon" : "Furnace",
+      "lastUsed" : "1970-01-01T00:00:00.000Z",
+      "lastVersionId" : "a1.0.15",
+      "name" : "",
+      "type" : "custom"
+    },
+    "40ace287030256ed5d562e2970b48e1c" : {
+      "created" : "2021-12-07T18:48:34.902Z",
+      "icon" : "Furnace",
+      "lastUsed" : "1970-01-01T00:00:00.000Z",
+      "lastVersionId" : "1.18_experimental-snapshot-2",
+      "name" : "",
+      "type" : "custom"
+    },
+    "4239a90f3a08bcd3fed3bd3be16f2c35" : {
+      "created" : "2021-12-07T18:48:46.653Z",
+      "icon" : "Furnace",
+      "lastUsed" : "1970-01-01T00:00:00.000Z",
+      "lastVersionId" : "1.18_experimental-snapshot-5",
+      "name" : "",
+      "type" : "custom"
+    },
+    "46e9fe2a019a4bde69d4346fa98e5390" : {
+      "created" : "2021-12-07T08:21:17.315Z",
+      "icon" : "Furnace",
+      "lastUsed" : "1970-01-01T00:00:00.000Z",
+      "lastVersionId" : "c0.0.11a",
+      "name" : "",
+      "type" : "custom"
+    },
+    "4bdef32ea1ea68750ab1335dd805cb0e" : {
+      "created" : "2021-12-06T15:22:34.590Z",
+      "icon" : "Furnace",
+      "lastUsed" : "1970-01-01T00:00:00.000Z",
+      "lastVersionId" : "b1.1_02",
+      "name" : "",
+      "type" : "custom"
+    },
+    "4cb22722ddf3f1fba8ae655c0aeab5c3" : {
+      "created" : "2021-12-07T18:47:05.206Z",
+      "icon" : "Furnace",
+      "lastUsed" : "1970-01-01T00:00:00.000Z",
+      "lastVersionId" : "1.16_combat-1",
+      "name" : "",
+      "type" : "custom"
+    },
+    "4cb87686e6b9609210c33bc89c7c27a8" : {
+      "created" : "2021-12-07T18:40:23.790Z",
+      "icon" : "Furnace",
+      "lastUsed" : "1970-01-01T00:00:00.000Z",
+      "lastVersionId" : "3D Shareware v1.34",
+      "name" : "",
+      "type" : "custom"
+    },
+    "4e781de7dd334d2d4cec0bf64ab3885a" : {
+      "created" : "2021-12-06T15:23:42.711Z",
+      "icon" : "Furnace",
+      "lastUsed" : "1970-01-01T00:00:00.000Z",
+      "lastVersionId" : "a1.2.6",
+      "name" : "",
+      "type" : "custom"
+    },
+    "4e92f43da1ee39737838625cc71bb704" : {
+      "created" : "2021-12-07T08:39:40.430Z",
+      "icon" : "Furnace",
+      "lastUsed" : "1970-01-01T00:00:00.000Z",
+      "lastVersionId" : "a1.0.17_04",
+      "name" : "",
+      "type" : "custom"
+    },
+    "5445172e052e20eb12722e4a010e086b" : {
+      "created" : "2021-12-06T15:18:48.485Z",
+      "icon" : "Furnace",
+      "lastUsed" : "1970-01-01T00:00:00.000Z",
+      "lastVersionId" : "1.6.4",
+      "name" : "",
+      "type" : "custom"
+    },
+    "5691b7fab1b8da6061016ecafa6dd3a0" : {
+      "created" : "2021-12-07T18:32:26.850Z",
+      "icon" : "Furnace",
+      "lastUsed" : "1970-01-01T00:00:00.000Z",
+      "lastVersionId" : "a1.1.0",
+      "name" : "",
+      "type" : "custom"
+    },
+    "594029c25e32ee282cdbe84d78249245" : {
+      "created" : "2021-12-06T15:45:11.638Z",
+      "icon" : "Furnace",
+      "lastUsed" : "1970-01-01T00:00:00.000Z",
+      "lastVersionId" : "c0.24_st_03",
+      "name" : "",
+      "type" : "custom"
+    },
+    "5a26152c40053d46ea8166dbbab93ed9" : {
+      "created" : "2021-12-06T16:00:40.953Z",
+      "icon" : "Furnace",
+      "lastUsed" : "1970-01-01T00:00:00.000Z",
+      "lastVersionId" : "c0.0.18a_02",
+      "name" : "",
+      "type" : "custom"
+    },
+    "5a457165ba67673a35054bc42ccd25ba" : {
+      "created" : "2021-12-06T15:19:08.135Z",
+      "icon" : "Furnace",
+      "lastUsed" : "1970-01-01T00:00:00.000Z",
+      "lastVersionId" : "1.4.7",
+      "name" : "",
+      "type" : "custom"
+    },
+    "63e91a0ab8b145fb7a7ac0dc0cac9fc8" : {
+      "created" : "2021-12-07T18:48:31.927Z",
+      "icon" : "Furnace",
+      "lastUsed" : "1970-01-01T00:00:00.000Z",
+      "lastVersionId" : "1.18_experimental-snapshot-1",
+      "name" : "",
+      "type" : "custom"
+    },
+    "65740b28f86e9cacb4a0323e9866db25" : {
+      "created" : "2021-12-06T15:18:19.133Z",
+      "icon" : "Furnace",
+      "lastUsed" : "1970-01-01T00:00:00.000Z",
+      "lastVersionId" : "1.11.2",
+      "name" : "",
+      "type" : "custom"
+    },
+    "681510bfbfffd2d4434159a4cbe8c298" : {
+      "created" : "2021-12-07T08:21:06.333Z",
+      "icon" : "Furnace",
+      "lastUsed" : "1970-01-01T00:00:00.000Z",
+      "lastVersionId" : "c0.0.13a_03",
+      "name" : "",
+      "type" : "custom"
+    },
+    "73fab31c3ff587b9468705c9ee63847f" : {
+      "created" : "2021-12-07T18:29:53.063Z",
+      "icon" : "Furnace",
+      "lastUsed" : "1970-01-01T00:00:00.000Z",
+      "lastVersionId" : "a1.0.4",
+      "name" : "",
+      "type" : "custom"
+    },
+    "7937dda26163b42124315bdf38f7e120" : {
+      "created" : "2021-12-07T18:46:06.293Z",
+      "icon" : "Furnace",
+      "lastUsed" : "1970-01-01T00:00:00.000Z",
+      "lastVersionId" : "1.15_combat-1",
+      "name" : "",
+      "type" : "custom"
+    },
+    "7ed7576a08b87730c1b5e8f4934a4458" : {
+      "created" : "2021-12-06T15:22:07.733Z",
+      "icon" : "Furnace",
+      "lastUsed" : "1970-01-01T00:00:00.000Z",
+      "lastVersionId" : "b1.4_01",
+      "name" : "",
+      "type" : "custom"
+    },
+    "7f8ea64e6ea616f64a541b988d936065" : {
+      "created" : "2021-12-06T15:18:30.422Z",
+      "icon" : "Furnace",
+      "lastUsed" : "1970-01-01T00:00:00.000Z",
+      "lastVersionId" : "1.9.4",
+      "name" : "",
+      "type" : "custom"
+    },
+    "80345f012c1ded6e39a8cb84e7570e84" : {
+      "created" : "2021-12-06T15:20:42.950Z",
+      "icon" : "Furnace",
+      "lastUsed" : "1970-01-01T00:00:00.000Z",
+      "lastVersionId" : "1.1",
+      "name" : "",
+      "type" : "custom"
+    },
+    "8125008ed3f4aa2c7d8b2e1497f1e110" : {
+      "created" : "2021-12-07T18:46:59.129Z",
+      "icon" : "Furnace",
+      "lastUsed" : "1970-01-01T00:00:00.000Z",
+      "lastVersionId" : "1.16_combat-0",
+      "name" : "",
+      "type" : "custom"
+    },
+    "919d7b4f4a7b5196948ff051b0b47208" : {
+      "created" : "2021-12-06T15:44:08.089Z",
+      "icon" : "Furnace",
+      "lastUsed" : "1970-01-01T00:00:00.000Z",
+      "lastVersionId" : "in-20100105",
+      "name" : "",
+      "type" : "custom"
+    },
+    "94008ca111d0206fc4c7535bf9280100" : {
+      "created" : "2021-12-06T15:45:41.534Z",
+      "icon" : "Furnace",
+      "lastUsed" : "1970-01-01T00:00:00.000Z",
+      "lastVersionId" : "c0.0.21a",
+      "name" : "",
+      "type" : "custom"
+    },
+    "94f990a7afc9af82d5557e5a025b1901" : {
+      "created" : "2021-12-06T15:21:17.926Z",
+      "icon" : "Furnace",
+      "lastUsed" : "1970-01-01T00:00:00.000Z",
+      "lastVersionId" : "b1.7.3",
+      "name" : "",
+      "type" : "custom"
+    },
+    "951675d2c7d6b07009951523d8ff67b5" : {
+      "created" : "2021-12-07T18:24:43.904Z",
+      "icon" : "Furnace",
+      "lastUsed" : "1970-01-01T00:00:00.000Z",
+      "lastVersionId" : "inf-20100625-2",
+      "name" : "",
+      "type" : "custom"
+    },
+    "95414dd521b9dec564cca289d737bbed" : {
+      "created" : "2021-12-06T15:44:30.790Z",
+      "icon" : "Furnace",
+      "lastUsed" : "1970-01-01T00:00:00.000Z",
+      "lastVersionId" : "c0.29_02",
+      "name" : "",
+      "type" : "custom"
+    },
+    "95a78a8b0a449efd3644f0e4aa319f66" : {
+      "created" : "2021-12-07T18:45:43.077Z",
+      "icon" : "Furnace",
+      "lastUsed" : "1970-01-01T00:00:00.000Z",
+      "lastVersionId" : "1.14_combat-3",
+      "name" : "",
+      "type" : "custom"
+    },
+    "9c695974a81f007bebce0f53bd215972" : {
+      "created" : "2021-12-07T18:48:22.148Z",
+      "icon" : "Furnace",
+      "lastUsed" : "1970-01-01T00:00:00.000Z",
+      "lastVersionId" : "20w14infinite",
+      "name" : "",
+      "type" : "custom"
+    },
+    "9ec293cb6ed42dca2542026f41efcf1f" : {
+      "created" : "2021-12-06T15:42:05.425Z",
+      "icon" : "Furnace",
+      "lastUsed" : "1970-01-01T00:00:00.000Z",
+      "lastVersionId" : "inf-20100630-2",
+      "name" : "",
+      "type" : "custom"
+    },
+    "a1322525d2c51583ab372d6dd58663a2" : {
+      "created" : "1970-01-02T00:00:00.000Z",
+      "icon" : "Grass",
+      "lastUsed" : "1970-01-02T00:00:00.000Z",
+      "lastVersionId" : "latest-release",
+      "name" : "",
+      "type" : "latest-release"
+    },
+    "a181a0fe206544604bd1121791a85c4a" : {
+      "created" : "2021-12-07T18:38:15.849Z",
+      "icon" : "Furnace",
+      "lastUsed" : "1970-01-01T00:00:00.000Z",
+      "lastVersionId" : "2point0_red",
+      "name" : "",
+      "type" : "custom"
+    },
+    "a44dc00dfee6c7befbcd37f0a2babea0" : {
+      "created" : "2021-12-06T15:20:58.398Z",
+      "icon" : "Furnace",
+      "lastUsed" : "1970-01-01T00:00:00.000Z",
+      "lastVersionId" : "b1.8.1",
+      "name" : "",
+      "type" : "custom"
+    },
+    "a84f04747e00dc333f58135886ee5edc" : {
+      "created" : "2021-12-07T18:48:49.639Z",
+      "icon" : "Furnace",
+      "lastUsed" : "1970-01-01T00:00:00.000Z",
+      "lastVersionId" : "1.18_experimental-snapshot-6",
+      "name" : "",
+      "type" : "custom"
+    },
+    "af8b99b38fde85384d98ae662c2f4ecb" : {
+      "created" : "2021-12-06T16:00:11.134Z",
+      "icon" : "Furnace",
+      "lastUsed" : "1970-01-01T00:00:00.000Z",
+      "lastVersionId" : "c0.0.17a",
+      "name" : "",
+      "type" : "custom"
+    },
+    "b2f71913166ab4cc5edd70f97a06ab49" : {
+      "created" : "2021-12-06T15:21:27.758Z",
+      "icon" : "Furnace",
+      "lastUsed" : "1970-01-01T00:00:00.000Z",
+      "lastVersionId" : "b1.6.6",
+      "name" : "",
+      "type" : "custom"
+    },
+    "b3bbf5740673e4f2c59d606e610461c3" : {
+      "created" : "2021-12-06T15:44:36.037Z",
+      "icon" : "Furnace",
+      "lastUsed" : "1970-01-01T00:00:00.000Z",
+      "lastVersionId" : "c0.28_01",
+      "name" : "",
+      "type" : "custom"
+    },
+    "b627bac48b020c10eeef179f8003419b" : {
+      "created" : "2021-12-06T15:19:18.840Z",
+      "icon" : "Furnace",
+      "lastUsed" : "1970-01-01T00:00:00.000Z",
+      "lastVersionId" : "1.3.2",
+      "name" : "",
+      "type" : "custom"
+    },
+    "bab28947d1a31c03929ec9046e9fd1e0" : {
+      "created" : "2021-12-06T15:17:06.685Z",
+      "icon" : "Furnace",
+      "lastUsed" : "1970-01-01T00:00:00.000Z",
+      "lastVersionId" : "1.14.4",
+      "name" : "",
+      "type" : "custom"
+    },
+    "baf301876fae93a04ced3be7cc32a2c3" : {
+      "created" : "2021-12-06T15:45:31.129Z",
+      "icon" : "Furnace",
+      "lastUsed" : "1970-01-01T00:00:00.000Z",
+      "lastVersionId" : "c0.0.22a_05",
+      "name" : "",
+      "type" : "custom"
+    },
+    "bb478d49b48a8933c9a65d1d0b328ead" : {
+      "created" : "2021-12-07T18:47:42.182Z",
+      "icon" : "Furnace",
+      "lastUsed" : "1970-01-01T00:00:00.000Z",
+      "lastVersionId" : "1.16_combat-6",
+      "name" : "",
+      "type" : "custom"
+    },
+    "ca5095fd41453f96db171bc19f69087d" : {
+      "created" : "2021-12-06T15:20:49.758Z",
+      "icon" : "Furnace",
+      "lastUsed" : "1970-01-01T00:00:00.000Z",
+      "lastVersionId" : "1.0",
+      "name" : "",
+      "type" : "custom"
+    },
+    "cb47ee4f5c915ef7455fd0d7580688d9" : {
+      "created" : "2021-12-07T18:39:12.925Z",
+      "icon" : "Furnace",
+      "lastUsed" : "1970-01-01T00:00:00.000Z",
+      "lastVersionId" : "15w14a",
+      "name" : "",
+      "type" : "custom"
+    },
+    "cdf31663d0d1a74fd0c481c9c272eb1f" : {
+      "created" : "2021-12-06T15:19:51.199Z",
+      "icon" : "Furnace",
+      "lastUsed" : "1970-01-01T00:00:00.000Z",
+      "lastVersionId" : "1.2.5",
+      "name" : "",
+      "type" : "custom"
+    },
+    "ce1afdca6a2c029637398e1d55d8630e" : {
+      "created" : "2021-12-07T18:34:31.213Z",
+      "icon" : "Furnace",
+      "lastUsed" : "1970-01-01T00:00:00.000Z",
+      "lastVersionId" : "a1.2.0",
+      "name" : "",
+      "type" : "custom"
+    },
+    "d0a9ef7cbcb5b82480c7b8b6bde2751a" : {
+      "created" : "2021-12-07T18:47:29.998Z",
+      "icon" : "Furnace",
+      "lastUsed" : "1970-01-01T00:00:00.000Z",
+      "lastVersionId" : "1.16_combat-3",
+      "name" : "",
+      "type" : "custom"
+    },
+    "d48dab1553212708eea22ec3e4f999a7" : {
+      "created" : "2021-12-06T15:43:39.729Z",
+      "icon" : "Furnace",
+      "lastUsed" : "2021-12-07T18:22:23.516Z",
+      "lastVersionId" : "in-20100223",
+      "name" : "",
+      "type" : "custom"
+    },
+    "d60bbb9e61cc14aaa3a30b12f69b4923" : {
+      "created" : "2021-12-07T18:47:35.573Z",
+      "icon" : "Furnace",
+      "lastUsed" : "1970-01-01T00:00:00.000Z",
+      "lastVersionId" : "1.16_combat-5",
+      "name" : "",
+      "type" : "custom"
+    },
+    "d6e460a22a9e2f864e6013aab7254bf6" : {
+      "created" : "2021-12-07T18:31:33.375Z",
+      "icon" : "Furnace",
+      "lastUsed" : "1970-01-01T00:00:00.000Z",
+      "lastVersionId" : "a1.0.14",
+      "name" : "",
+      "type" : "custom"
+    },
+    "d7bb6737ae7b11b9ca7cdad6c8d76fce" : {
+      "created" : "2021-12-06T15:18:40.814Z",
+      "icon" : "Furnace",
+      "lastUsed" : "1970-01-01T00:00:00.000Z",
+      "lastVersionId" : "1.7.10",
+      "name" : "",
+      "type" : "custom"
+    },
+    "d891f70420ed65d18ade969039e7186e" : {
+      "created" : "2021-12-07T18:40:09.708Z",
+      "icon" : "Furnace",
+      "lastUsed" : "1970-01-01T00:00:00.000Z",
+      "lastVersionId" : "1.RV-Pre1",
+      "name" : "",
+      "type" : "custom"
+    },
+    "da8f84504e6057fad39f2318c8c08b8f" : {
+      "created" : "2021-12-07T08:21:12.596Z",
+      "icon" : "Furnace",
+      "lastUsed" : "1970-01-01T00:00:00.000Z",
+      "lastVersionId" : "c0.0.12a_03",
+      "name" : "",
+      "type" : "custom"
+    },
+    "dac1afee7758eb907a5cfa030d68198c" : {
+      "created" : "2021-12-07T18:45:33.061Z",
+      "icon" : "Furnace",
+      "lastUsed" : "1970-01-01T00:00:00.000Z",
+      "lastVersionId" : "1.14_combat-0",
+      "name" : "",
+      "type" : "custom"
+    },
+    "df5bfa461603d9506bacc1f9c0fceed9" : {
+      "created" : "2021-12-07T18:38:25.446Z",
+      "icon" : "Furnace",
+      "lastUsed" : "1970-01-01T00:00:00.000Z",
+      "lastVersionId" : "2point0_purple",
+      "name" : "",
+      "type" : "custom"
+    },
+    "e0d088ce4d12252a6ead37ebcb36596d" : {
+      "created" : "2021-12-07T18:38:39.494Z",
+      "icon" : "Furnace",
+      "lastUsed" : "1970-01-01T00:00:00.000Z",
+      "lastVersionId" : "2point0_blue",
+      "name" : "",
+      "type" : "custom"
+    },
+    "e281c9db6c606c2eef72b890c1ced59c" : {
+      "created" : "2021-12-06T15:18:35.206Z",
+      "icon" : "Furnace",
+      "lastUsed" : "1970-01-01T00:00:00.000Z",
+      "lastVersionId" : "1.8.9",
+      "name" : "",
+      "type" : "custom"
+    },
+    "e331ddef296ce4a5037126365da076ba" : {
+      "created" : "2021-12-07T18:34:50.265Z",
+      "icon" : "Furnace",
+      "lastUsed" : "1970-01-01T00:00:00.000Z",
+      "lastVersionId" : "b1.4",
+      "name" : "",
+      "type" : "custom"
+    },
+    "e6c90e428a9b6e58e5735ef341852edd" : {
+      "created" : "2021-12-06T15:18:58.382Z",
+      "icon" : "Furnace",
+      "lastUsed" : "1970-01-01T00:00:00.000Z",
+      "lastVersionId" : "1.5.2",
+      "name" : "",
+      "type" : "custom"
+    },
+    "e74323f7527568d0169826ba00b91bfb" : {
+      "created" : "2021-12-06T15:22:12.404Z",
+      "icon" : "Furnace",
+      "lastUsed" : "1970-01-01T00:00:00.000Z",
+      "lastVersionId" : "b1.3_01",
+      "name" : "",
+      "type" : "custom"
+    },
+    "f2618f69e80ea6cc2853b0bfeee62d9b" : {
+      "created" : "2021-12-07T18:30:54.767Z",
+      "icon" : "Furnace",
+      "lastUsed" : "1970-01-01T00:00:00.000Z",
+      "lastVersionId" : "a1.0.13_01-2",
+      "name" : "",
+      "type" : "custom"
+    },
+    "f304e362bf59b7d02dac170c4fbef2ae" : {
+      "created" : "2021-12-06T15:41:40.129Z",
+      "icon" : "Furnace",
+      "lastUsed" : "1970-01-01T00:00:00.000Z",
+      "lastVersionId" : "a1.1.2_01",
+      "name" : "",
+      "type" : "custom"
+    },
+    "f3b147a6f33918c41a114460c6437613" : {
+      "created" : "2021-12-06T15:44:21.335Z",
+      "icon" : "Furnace",
+      "lastUsed" : "1970-01-01T00:00:00.000Z",
+      "lastVersionId" : "c0.30_01c",
+      "name" : "",
+      "type" : "custom"
+    },
+    "f7cb05a944f517479fb4bca5527d58ed" : {
+      "created" : "2021-12-06T15:18:23.638Z",
+      "icon" : "Furnace",
+      "lastUsed" : "1970-01-01T00:00:00.000Z",
+      "lastVersionId" : "1.10.2",
+      "name" : "",
+      "type" : "custom"
+    },
+    "fd6910507b93b306e090ff4a81ac74f5" : {
+      "created" : "2021-12-07T08:26:35.995Z",
+      "icon" : "Furnace",
+      "lastUsed" : "1970-01-01T00:00:00.000Z",
+      "lastVersionId" : "c0.0.16a_02",
+      "name" : "",
+      "type" : "custom"
+    },
+    "fdf8a02754147e71ba198f3a2375c9e3" : {
+      "created" : "2021-12-07T18:48:43.055Z",
+      "icon" : "Furnace",
+      "lastUsed" : "1970-01-01T00:00:00.000Z",
+      "lastVersionId" : "1.18_experimental-snapshot-4",
+      "name" : "",
+      "type" : "custom"
+    }
+  },
+  "settings" : {
+    "crashAssistance" : true,
+    "enableAdvanced" : false,
+    "enableAnalytics" : true,
+    "enableHistorical" : false,
+    "enableReleases" : true,
+    "enableSnapshots" : false,
+    "keepLauncherOpen" : false,
+    "profileSorting" : "ByLastPlayed",
+    "showGameLog" : false,
+    "showMenu" : false,
+    "soundOn" : false
+  },
+  "version" : 3
+}

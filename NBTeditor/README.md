@@ -1,26 +1,34 @@
 # NBTeditor
+- encode.py: Convert JSON to NBT
+- fail.txt: file with the latest errors
+- JSON tests: compatibility tests for converting to NBT
+- NBT tests: NBT examples that have to be supported
+- options.json: settings for the conversion (see below)
+- parse.py: Simplify NBT as JSON
+- README.md: this file
+
 ## Usage
-* Put NBT files in folder, run parse.py and insert input path and output path to your file or folder
+* Run parse.py & insert path to NBT and output path
 * Edit files as JSON
-* run encode.py and insert input path and output path
+* Run encode.py & insert input to JSON path and output path
 
 # Options.json
-key | default | purpose
---- | --- | ---
-AllowNan | true | Allow NaN, -infinity and infinity as values
-AutoBool | true | Convert "true" and "false" to bool
-AutoFloat | false | Automatically convert number to decimal number
-AutoInt | false | Automatically convert decimal number to number
-BigEndian | null | Convert to Java Edition or Bedrock Edition
-CommaSeparator | "" | Separator between values
-DEBUG_MODE | false | crash program on error with all information
-DoublePointSeparator | " " | Separator between key and value
-EnsureAscii | false | escape non-ASCII characters
-Indent | "\t" | null, number of spaces or text as indent
-NBTExtensions | [".dat", ".dat_mcr", ".dat_old", ".mcstructure", ".nbt"] | Extensions of NBT files
-RepairFiles | true | Repair NBT files that end abruptly
-SortKeys | false | Sort keys in dictionary
-UncompressedFiles | ["_BE", ".mcstructure", ".nbt", "/servers.dat", "/servers.dat_old"] | Files that are not compressed
+key | purpose
+--- | ---
+AllowNan | Allow NaN, -infinity & infinity as values
+AutoBool | Convert "true" & "false" to boolean
+AutoFloat | Automatically convert number to decimal number
+AutoInt | Automatically convert decimal number to number
+BigEndian | Convert to Java or Bedrock Edition, *null*: leave in original edition
+CommaSeparator | Separator between values in JSON
+DEBUG_MODE | Show full error traceback
+DoublePointSeparator | Separator between key & value in JSON
+EnsureAscii | escape non-ASCII characters
+Indent | number of spaces or text as indent, *null:* no indent
+NBTExtensions | Extensions of NBT files
+RepairFiles | Repair NBT files that end abruptly
+SortKeys | Sort keys in dictionary
+UncompressedFiles | Extensions that won't be compressed
 
 # NBT format
 Bytecode | Type | Name | Limitations
@@ -508,5 +516,7 @@ Bytecode | Type | Name | Limitations
     ```
 * JSON Decode
     ```JSON
-    {}
+    {
+		"": {}
+	}
     ```

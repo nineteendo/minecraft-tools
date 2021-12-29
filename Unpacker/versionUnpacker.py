@@ -1,4 +1,5 @@
-import os, shutil, json, platform, sys, traceback
+import os, json, platform, sys, traceback
+from zipfile import ZipFile
 
 options = {
 	"DEBUG_MODE": False,
@@ -12,7 +13,6 @@ options = {
 	}
 }
 
-print(options)
 def update_json(old_json, new_json):
 	for key in new_json:
 		if not key in old_json:
@@ -37,7 +37,7 @@ try:
 	if sys.version_info[0] < 3:
 		raise RuntimeError("Must be using Python 3")
 
-	print("\n\033[95m\033[1mMinecraft Asset Unpacker v1.1.0\n(C) 2021 by Nineteendo\033[0m\n")
+	print("\n\033[95m\033[1mMinecraft Version Unpacker v1.1.0\n(C) 2021 by Nineteendo\033[0m\n")
 	print("Working directory: " + os.getcwd())
 	try:
 		update_json(options, json.load(open("options.json", "rb")))
@@ -45,23 +45,22 @@ try:
 		error_message("%s in options.json: %s" % (type(e).__name__, e))
 		
 	if platform.system() in options["minecraftFolder"]:
-		path = os.path.join(os.path.expanduser(options["minecraftFolder"][platform.system()]), "assets")
+		path = os.path.expanduser(options["minecraftFolder"][platform.system()])
 	else:
 		raise SystemError("Unknown system: %s" % platform.system())
 
-	print("\033[1mOptions:\033[0m " + " ".join(sorted(os.listdir(os.path.join(path, "indexes")))).replace(".json", ""))
 	version = input("\033[1mVersion=\033[0m ")
-	pathout = input("\033[1mOutput directory\033[0m: ")
-	data = json.load(open(os.path.join(path, "indexes", version + ".json"),'r'))["objects"]
-	for location in data:
-		if not location.endswith(options["ignoreExtensions"]):
-			os.makedirs(os.path.dirname(os.path.join(pathout, location)), exist_ok=True)
-			file_hash = data[location]["hash"]
-			try:
-				shutil.copyfile(os.path.join(path, "objects", file_hash[:2], file_hash), os.path.join(pathout, location))
-				print("wrote " + location)
-			except:
-				error_message("Missing " + file_hash)
+	try:
+		version_id = json.load(open(os.path.join(path, "versions/%s/%s.json" % (version, version)), "rb"))["id"]
+		pathout = input("\033[1mOutput directory\033[0m: ")
+		with ZipFile(os.path.join(path, "versions/%s/%s.jar" % (version_id, version_id)), 'r') as zipObj:
+			for fileName in zipObj.namelist():
+				if not fileName.endswith(options["ignoreExtensions"]):
+					zipObj.extract(fileName, pathout)
+					print("wrote " + fileName)
+	except Exception:
+		error_message(version + " not found")
+	
 except BaseException as e:
 	error_message('%s: %s' % (type(e).__name__, e))
 fail.close()
