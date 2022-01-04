@@ -72,7 +72,7 @@ try:
 
 	print("\033[95m\033[1mMinecraft Launcher Manager v1.1.0\n(C) 2021 by Nineteendo\033[0m\n")
 	try:
-		update_json(options, json.load(open("options.json", "rb")))
+		update_json(options, json.load(open(os.path.join(sys.path[0], "options.json"), "rb")))
 	except Exception as e:
 		error_message('%s in options.json: %s' % (type(e).__name__, e))
 

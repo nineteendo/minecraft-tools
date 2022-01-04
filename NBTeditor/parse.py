@@ -227,11 +227,7 @@ def conversion(inp, out):
 		except Exception as e:
 			exception = 'Failed Java Edition parse: %s in %s pos %s: %s' % (type(e).__name__, inp, file.tell() - 1, e)
 		
-		if open(inp, "rb").read(2) == b"\x1F\x8B":
-			file = gzip.open(inp, "rb")
-		else:
-			file = open(inp, "rb")
-		
+		file.seek(0)
 		try:
 			jfn = out + "_BE" + '.json'
 			data = parse_root_object16(file, "<")
@@ -249,7 +245,7 @@ try:
 	print("\033[95m\033[1mJSONS NBTencoder v1.1.0\n(C) 2021 by Nineteendo\033[0m\n")
 	print("Working directory: " + os.getcwd())
 	try:
-		newoptions = json.load(open("options.json", "rb"))
+		newoptions = json.load(open(os.path.join(sys.path[0], "options.json"), "rb"))
 		for key in options:
 			if key in newoptions and newoptions[key] != options[key]:
 				if type(options[key]) == type(newoptions[key]):

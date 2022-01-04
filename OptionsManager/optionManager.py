@@ -1,4 +1,4 @@
-import os, json, platform, traceback
+import os, sys, json, platform, traceback
 
 options = {
 	"backupOptions": True,
@@ -221,7 +221,7 @@ try:
 	fail = open("fail.txt", "w")
 	print("\033[95m\033[1mMinecraft Options Manager v1.1.0\n(C) 2021 by Nineteendo\033[0m")
 	try:
-		update_json(options, json.load(open("options.json", "rb")))
+		update_json(options, json.load(open(os.path.join(sys.path[0], "options.json"), "rb")))
 	except Exception as e:
 		error_message("%s in options.json: %s" % (type(e).__name__, e))
 		
@@ -234,16 +234,16 @@ try:
 	if options["backupOptions"]:
 		try:
 			for line in open(os.path.join(path, "options_old.txt"),"r").readlines():
-				tupel = line.split(":")
-				rename_value(all_options, tupel[0], tupel[1].strip("\n"))
+				key, value = line.split(":")
+				rename_value(all_options, key, value.strip("\n"))
 		except Exception:
 			pass
 	
 	new_options = {}
 	try:
 		for line in open(os.path.join(path, "options.txt"),"r").readlines():
-			tupel = line.split(":")
-			rename_value(new_options, tupel[0], tupel[1].strip("\n"))
+			key, value = line.split(":")
+			rename_value(new_options, key, value.strip("\n"))
 	except Exception:
 		new_options = all_options
 		error_message(os.path.join(path, "options.txt") + " is missing.")

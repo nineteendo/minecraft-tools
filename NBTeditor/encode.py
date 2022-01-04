@@ -176,9 +176,7 @@ def encode_json(data, byteorder, override = end):
 		return (object16, encode_object16(data, byteorder, override) + end)	
 	elif isinstance(data, tuple):
 		key = encode_string(data[0], byteorder)
-		tupel = encode_json(data[1], byteorder)
-		tag = tupel[0]
-		value = tupel[1]
+		tag, value = encode_json(data[1], byteorder)
 		return tag + key + value
 	elif isinstance(data, bool) and override in [end, string16]:
 		return (string16, encode_string(str(data).lower(), byteorder))
@@ -238,7 +236,7 @@ try:
 	print("\033[95m\033[1mJSONS NBTencoder v1.1.0\n(C) 2021 by Nineteendo\033[0m\n")
 	print("Working directory: " + os.getcwd())
 	try:
-		newoptions = json.load(open("options.json", "rb"))
+		newoptions = json.load(open(os.path.join(sys.path[0], "options.json"), "rb"))
 		for key in options:
 			if key in newoptions and newoptions[key] != options[key]:
 				if type(options[key]) == type(newoptions[key]):
